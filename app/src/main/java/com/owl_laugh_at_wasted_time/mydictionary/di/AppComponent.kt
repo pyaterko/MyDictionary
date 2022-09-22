@@ -8,6 +8,12 @@ import javax.inject.Singleton
 
 @Singleton
 @Component(
+    modules = [
+        ApiModule::class,
+        WorkerModule::class,
+        RepositoryModule::class,
+        DataModule::class
+    ]
 
 )
 interface AppComponent {
