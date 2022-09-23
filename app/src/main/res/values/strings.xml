@@ -1,3 +1,9 @@
 <resources>
     <string name="app_name">MyDictionary</string>
+    <string name="addfavorite_alert_message">Добавить к изучению?</string>
+    <string name="deletefavorite_alert_message">Удалить из избранного?</string>
+    <string name="selected_alert_message">Список пуст добавте в список слова на странице словаря</string>
+    <string name="action_yes">ДА</string>
+    <string name="action_no">НЕТ</string>
+    <string name="fragment_words_select_checkbox_select_all">Выбрать все</string>
 </resources>

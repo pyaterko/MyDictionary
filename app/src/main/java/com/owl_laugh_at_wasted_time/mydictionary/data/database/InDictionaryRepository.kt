@@ -26,7 +26,7 @@ class InDictionaryRepository @Inject constructor(
         dictionaryDao.addItemNote(mapper.mapEntityToDbModel(item))
     }
 
-    override fun detListLearn(): LiveData<List<WordItem>> = Transformations.map(
+    override fun getListLearn(): LiveData<List<WordItem>> = Transformations.map(
         learnWordsDao.getListWords()
     ) {
         mapperLearn.mapListDbModelToListEntity(it)
