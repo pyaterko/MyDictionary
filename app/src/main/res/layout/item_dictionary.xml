@@ -31,7 +31,7 @@
     <View
         android:id="@+id/words_divider"
         android:layout_width="0dp"
-        android:layout_height="4dp"
+        android:layout_height="6dp"
         app:layout_constraintBottom_toTopOf="@id/ru_word"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/word_select"
@@ -41,6 +41,7 @@
         android:id="@+id/ru_word"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
+        android:layout_marginBottom="4dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toEndOf="@id/word_select"

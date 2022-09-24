@@ -10,6 +10,7 @@ import com.owl_laugh_at_wasted_time.mydictionary.R
 import com.owl_laugh_at_wasted_time.mydictionary.databinding.ActivityMainBinding
 import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.base.viewBinding
 import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.fragments.DictionaryFragment
+import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.fragments.WordsCheckFragment
 import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.fragments.WordsSelectFragment
 
 class MainActivity : AppCompatActivity(R.layout.activity_main) {
@@ -38,7 +39,7 @@ class MainActivity : AppCompatActivity(R.layout.activity_main) {
                 launchFragment(WordsSelectFragment.newInstance())
             }
             R.id.learnFragment -> {
-                Toast.makeText(this, "1564981254", Toast.LENGTH_SHORT).show()
+                launchFragment(WordsCheckFragment.newInstance())
             }
         }
         return true

@@ -9,7 +9,9 @@ interface DictionaryRepository {
     fun getListWords(): LiveData<List<WordItem>>
     fun getListLearn(): LiveData<List<WordItem>>
     suspend fun addWord(item: WordItem)
+    suspend fun deleteItem(itemId: String)
     suspend fun addLearn(item: WordItem)
     suspend fun deleteLearn(itemId: String)
     suspend fun getDataFromRemote(word: String): List<DataModel>
+
 }

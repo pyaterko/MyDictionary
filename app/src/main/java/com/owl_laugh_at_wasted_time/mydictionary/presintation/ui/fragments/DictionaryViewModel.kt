@@ -6,10 +6,7 @@ import androidx.lifecycle.ViewModel
 import androidx.lifecycle.viewModelScope
 import com.owl_laugh_at_wasted_time.mydictionary.domain.entity.DataModel
 import com.owl_laugh_at_wasted_time.mydictionary.domain.entity.WordItem
-import com.owl_laugh_at_wasted_time.mydictionary.domain.usecase.AddLearnUsecase
-import com.owl_laugh_at_wasted_time.mydictionary.domain.usecase.AddWordUseCase
-import com.owl_laugh_at_wasted_time.mydictionary.domain.usecase.GetListWordsUsecase
-import com.owl_laugh_at_wasted_time.mydictionary.domain.usecase.GetRemoteDataSourseUseCase
+import com.owl_laugh_at_wasted_time.mydictionary.domain.usecase.*
 import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.base.DataLoadingState
 import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.base.Error
 import com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.base.Loading
@@ -20,6 +17,7 @@ import javax.inject.Inject
 class DictionaryViewModel @Inject constructor(
     private val getRemoteDataSourseUseCase: GetRemoteDataSourseUseCase,
     private val getListWordsUsecase: GetListWordsUsecase,
+    private val deleteWordUsecase: DeleteWordUsecase,
     private val addWordUseCase: AddWordUseCase,
     private val addLearnUsecase: AddLearnUsecase
 ) : ViewModel() {
@@ -38,6 +36,12 @@ class DictionaryViewModel @Inject constructor(
     fun addWordLearn(item: WordItem) {
         viewModelScope.launch {
             addLearnUsecase.addLearn(item)
+        }
+    }
+
+    fun deleteWord(item: WordItem) {
+        viewModelScope.launch {
+            deleteWordUsecase.deleteItem(item.word)
         }
     }
 

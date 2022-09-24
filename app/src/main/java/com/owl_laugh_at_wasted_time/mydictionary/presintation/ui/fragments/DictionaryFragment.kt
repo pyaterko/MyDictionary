@@ -83,6 +83,10 @@ class DictionaryFragment : BaseFragment(R.layout.fragment_dictionary) {
             )
         }
 
+        setupSwipe(binding.recyclerViewListNotes){
+            viewModel.deleteWord(adapter.wordsItemList[it.adapterPosition])
+        }
+
         setSearch()
         binding.imageView.setOnClickListener {
             viewModel.addWordItem(

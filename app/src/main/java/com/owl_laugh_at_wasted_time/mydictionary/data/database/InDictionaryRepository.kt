@@ -26,6 +26,10 @@ class InDictionaryRepository @Inject constructor(
         dictionaryDao.addItemNote(mapper.mapEntityToDbModel(item))
     }
 
+    override suspend fun deleteItem(itemId: String) {
+        dictionaryDao.deleteItem(itemId)
+    }
+
     override fun getListLearn(): LiveData<List<WordItem>> = Transformations.map(
         learnWordsDao.getListWords()
     ) {

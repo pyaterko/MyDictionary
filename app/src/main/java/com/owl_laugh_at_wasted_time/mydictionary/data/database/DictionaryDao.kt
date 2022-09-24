@@ -14,4 +14,7 @@ interface DictionaryDao {
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
     suspend fun addItemNote(noteDBModel: WordItemDBModel)
+
+    @Query("DELETE FROM WordItemDBModelTable WHERE word=:itemId")
+    suspend fun deleteItem(itemId: String)
 }

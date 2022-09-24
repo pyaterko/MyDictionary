@@ -1,7 +1,9 @@
 package com.owl_laugh_at_wasted_time.mydictionary.presintation.ui.fragments
 
 import android.view.LayoutInflater
+import android.view.View
 import android.view.ViewGroup
+import android.widget.CheckBox
 import androidx.recyclerview.widget.RecyclerView
 import com.owl_laugh_at_wasted_time.mydictionary.databinding.ItemWordsSelectBinding
 import com.owl_laugh_at_wasted_time.mydictionary.domain.entity.WordItem
@@ -19,6 +21,7 @@ class WordsSelectAdapter : RecyclerView.Adapter<WordsSelectAdapter.WordsSelectVi
     }
 
     var itemCheckClick: ((WordItem) -> Unit)? = null
+    var checkClick: ((View) -> Unit)? = null
 
     override fun onCreateViewHolder(
         parent: ViewGroup,
@@ -32,10 +35,18 @@ class WordsSelectAdapter : RecyclerView.Adapter<WordsSelectAdapter.WordsSelectVi
     override fun getItemCount(): Int = items.size
 
     override fun onBindViewHolder(holder: WordsSelectViewHolder, position: Int) {
-        holder.bind(items[position])
+        val item = items[position]
+        holder.binding.wordSelect.tag = item
+        holder.bind(item)
+        holder.binding.wordSelect.setOnCheckedChangeListener { _, isChecked ->
+                item.done = isChecked
+             checkClick?.invoke(holder.binding.wordSelect)
+
+        }
+
     }
 
-    inner class WordsSelectViewHolder(private val binding: ItemWordsSelectBinding) :
+    inner class WordsSelectViewHolder(val binding: ItemWordsSelectBinding) :
         RecyclerView.ViewHolder(binding.root) {
 
         fun bind(item: WordItem) {

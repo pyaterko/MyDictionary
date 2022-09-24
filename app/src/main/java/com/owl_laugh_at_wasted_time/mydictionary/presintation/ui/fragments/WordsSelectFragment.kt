@@ -43,8 +43,13 @@ class WordsSelectFragment : BaseFragment(R.layout.fragment_words_select) {
         viewModel.listLearn.observe(viewLifecycleOwner) {
             setWords(it.toList())
         }
-        setupSwipe(binding.wordsList){
+        setupSwipe(binding.wordsList) {
             viewModel.deleteWordLearn(wordsAdapter.getData()[it.adapterPosition])
+        }
+
+        wordsAdapter.checkClick = {
+            val item = it.tag as WordItem
+            viewModel.addLearnItem(item)
         }
     }
 
@@ -56,6 +61,7 @@ class WordsSelectFragment : BaseFragment(R.layout.fragment_words_select) {
         checkAllSelectedCheckBox(list)
         wordsAdapter.setData(list)
 
+
     }
 
     private fun checkAllSelectedCheckBox(list: List<WordItem>) {
@@ -65,9 +71,15 @@ class WordsSelectFragment : BaseFragment(R.layout.fragment_words_select) {
             selectAll.isChecked = list.size == list.filter { it.done }.size
 
             selectAll.setOnCheckedChangeListener { _, isChecked ->
-                wordsAdapter.getData().forEach { it.done = isChecked }
+                wordsAdapter.getData().forEach {
+                    it.done = isChecked
+                    viewModel.addLearnItem(it.copy(done = isChecked))
+                }
                 wordsAdapter.notifyDataSetChanged()
+
+
             }
+
         }
     }
 
