@@ -10,6 +10,7 @@ import android.os.Bundle
 import android.view.Gravity
 import android.view.View
 import android.widget.TextView
+import android.widget.Toast
 import androidx.appcompat.widget.SearchView
 import androidx.fragment.app.viewModels
 import androidx.recyclerview.widget.LinearLayoutManager
@@ -46,7 +47,6 @@ class DictionaryFragment : BaseFragment(R.layout.fragment_dictionary) {
         }
 
         viewModel.listWords.observe(viewLifecycleOwner) {
-            adapter.wordsItemList = it.toList()
             listWords = it.toList()
         }
 
@@ -79,6 +79,7 @@ class DictionaryFragment : BaseFragment(R.layout.fragment_dictionary) {
                 getString(R.string.addfavorite_alert_message),
                 actionPB1 = {
                     viewModel.addWordLearn(it)
+                    Toast.makeText(requireContext(),"слово ${it.word} добавлено в словарь",Toast.LENGTH_LONG).show()
                 }
             )
         }
@@ -89,12 +90,16 @@ class DictionaryFragment : BaseFragment(R.layout.fragment_dictionary) {
 
         setSearch()
         binding.imageView.setOnClickListener {
-            viewModel.addWordItem(
-                WordItem(
-                    binding.textViewEnWord.text.toString(),
-                    binding.textViewRuWord.text.toString()
-                )
+            val item=  WordItem(
+                binding.textViewEnWord.text.toString(),
+                binding.textViewRuWord.text.toString()
             )
+            viewModel.addWordLearn(item)
+            viewModel.addWordItem(item)
+
+            binding.textViewEnWord.setText("")
+            binding.textViewRuWord.setText("")
+            Toast.makeText(requireContext(),"слово ${binding.textViewEnWord.text} добавлено в словарь",Toast.LENGTH_LONG).show()
         }
 
     }
@@ -110,8 +115,13 @@ class DictionaryFragment : BaseFragment(R.layout.fragment_dictionary) {
             }
 
             override fun onQueryTextChange(newText: String): Boolean {
-                val list = listWords.filter { it.word.contains(newText, true) }
-                adapter.wordsItemList = list.toList()
+                if (newText.length>0){
+                    val list = listWords.filter { it.word.contains(newText, true) }
+                    adapter.wordsItemList = list.toList()
+                }else{
+                    adapter.wordsItemList = emptyList()
+                }
+
                 return true
             }
         })
